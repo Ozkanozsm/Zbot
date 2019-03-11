@@ -19,7 +19,8 @@ def oyun(oyunadi):
 def nabiyom(aktivitesi):
     if not aktivitesi:
         ylnck = "Hiçbir şey oynamıyorsun"
-    elif aktivitesi.type.name == "listening":
+
+    if aktivitesi.type.name == "listening":
         ylnck = muzik(aktivitesi.title)
     elif aktivitesi.type.name == "playing":
         ylnck = oyun(aktivitesi.name)

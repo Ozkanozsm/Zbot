@@ -52,16 +52,10 @@ async def on_message(message):
                 ylnck = "eksik veri girdin"
             else:
                 ylnck = varlarvs.havadark(mesajlarınhepsi[1])
-        elif mesaj == "hava2":
-            if len(mesajlarınhepsi) == 1:
-                ylnck = "eksik veri girdin"
-            else:
-                ylnck = varlarvs.havaopen(mesajlarınhepsi[1])
         elif mesaj == "gecici":
-            print(mesajlarınhepsi)
-            ylnck = "printlendi"
+            ylnck = mesajlarınhepsi
         elif mesaj == "dene":
-            ylnck = varlarvs.denemefonk(mesajlarınhepsi[1])
+            ylnck = type(msjyollayan.activity.start)
         elif mesaj == "çık":
             ylnck = "bb ben kaçar"
             await message.channel.send(ylnck)
