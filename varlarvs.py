@@ -61,12 +61,10 @@ def denemefonk(ilce):
 def havadark(ilce):
     darkskyapi = "5dc9545bd1a1234aee3dce97e8953b66/"
     darkskyurl = "https://api.darksky.net/forecast/"
-    if ilce == "maltepe":
-        latilong = "40.953845,29.124498"
-    elif (ilce == "acıbadem") or (ilce == "acibadem"):
-        latilong = "41.005202, 29.043165"
+    if ilce in dark_ilce_longlati:
+        latilong = dark_ilce_longlati[ilce]
     else:
-        return "hatalı ilçe girdin mal mısın lan şerro"
+        return "hatalı ilçe girdin"
 
     urlacan = urllib.request.urlopen(darkskyurl + darkskyapi + latilong + "?lang=tr&units=auto")
     veri = json.loads(urlacan.read().decode())
@@ -75,9 +73,6 @@ def havadark(ilce):
     derece = str(round(veri["hourly"]["data"][0]["temperature"]))
     return derece + "°C" + " " + saatlik_ozet
 
-def havaopen(ilce):
-    openapi = "a4972480eb62ae01c53bc8e831cb37f6"
-    openurl = ""
 
 def mesajadondur(a):
     listeoldu = list(a)
@@ -105,10 +100,12 @@ mesajlarakarsilik = {
     "ananzaa": "sensin o",
     "çal": "#play",
     "naber": "iyi senden",
-    "anan": "102 92",
-    "yrk": "anandır"
+    "anan": "102 92"
 }
 
 oynamalar = ["oyun", "nabıyom", "nabıyorum", "neyapıyorum"]
 hazirlik = ["hazır", "hazir", "ready", "hazırız", "bura"]
-ilce_longlati = {"maltepe"}
+dark_ilce_longlati = {
+    "maltepe": "40.953845,29.124498",
+    "acıbadem": "41.005202, 29.043165"
+}

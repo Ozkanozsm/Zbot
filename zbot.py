@@ -56,7 +56,7 @@ async def on_message(message):
             if len(mesajlarınhepsi) == 1:
                 ylnck = "eksik veri girdin"
             else:
-                ylnck = varlarvs.hav
+                ylnck = varlarvs.havaopen(mesajlarınhepsi[1])
         elif mesaj == "gecici":
             print(mesajlarınhepsi)
             ylnck = "printlendi"
