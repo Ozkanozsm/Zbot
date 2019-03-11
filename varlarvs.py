@@ -1,6 +1,8 @@
 import os
 import time
 import datetime
+import json
+import urllib.request
 
 prefix = "'"
 onay = "oke"
@@ -48,10 +50,39 @@ def oyuntepkisi(before, member):
         return "{} {} oynamaya başladı".format(member.display_name, member.activity.name)
 
 
+def denemefonk(ilce):
+    if ilce == "maltepe":
+        latilong = "40.953845,29.124498"
+    else:
+        latilong = "hatalı ilçe girdin mal mısın lan şerro"
+    return latilong
+
+
+def havadark(ilce):
+    darkskyapi = "5dc9545bd1a1234aee3dce97e8953b66/"
+    darkskyurl = "https://api.darksky.net/forecast/"
+    if ilce == "maltepe":
+        latilong = "40.953845,29.124498"
+    elif (ilce == "acıbadem") or (ilce == "acibadem"):
+        latilong = "41.005202, 29.043165"
+    else:
+        return "hatalı ilçe girdin mal mısın lan şerro"
+
+    urlacan = urllib.request.urlopen(darkskyurl + darkskyapi + latilong + "?lang=tr&units=auto")
+    veri = json.loads(urlacan.read().decode())
+    suanki_ozet = veri["currently"]["summary"]
+    saatlik_ozet = veri["hourly"]["summary"]
+    derece = str(round(veri["hourly"]["data"][0]["temperature"]))
+    return derece + "°C" + " " + saatlik_ozet
+
+def havaopen(ilce):
+    openapi = "a4972480eb62ae01c53bc8e831cb37f6"
+    openurl = ""
+
 def mesajadondur(a):
     listeoldu = list(a)
     del listeoldu[0]
-    return "".join(listeoldu).lower()
+    return "".join(listeoldu).lower().split()
 
 
 def pingle():
@@ -75,8 +106,9 @@ mesajlarakarsilik = {
     "çal": "#play",
     "naber": "iyi senden",
     "anan": "102 92",
-	"yrk": "anandır"
+    "yrk": "anandır"
 }
 
-oynamalar = ["oyun", "nabiyom", "nabıyom", "nabıyorum", "napıyom", "neyapıyorum"]
+oynamalar = ["oyun", "nabıyom", "nabıyorum", "neyapıyorum"]
 hazirlik = ["hazır", "hazir", "ready", "hazırız", "bura"]
+ilce_longlati = {"maltepe"}

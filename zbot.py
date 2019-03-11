@@ -26,7 +26,8 @@ async def on_message(message):
         await message.channel.send(ylnck)
     elif message.content.startswith(varlarvs.prefix):
         ylnck = "wrong"
-        mesaj = varlarvs.mesajadondur(message.content)
+        mesajlarınhepsi = varlarvs.mesajadondur(message.content)
+        mesaj = mesajlarınhepsi[0]
         if varlarvs.mesajlarakarsilik.get(mesaj):
             ylnck = varlarvs.mesajlarakarsilik.get(mesaj)
         elif mesaj == "name":
@@ -46,9 +47,21 @@ async def on_message(message):
             ylnck = botacmazamani
         elif mesaj == "up":
             ylnck = varlarvs.nekadardirup(botacmazamani)
+        elif mesaj == "hava":
+            if len(mesajlarınhepsi) == 1:
+                ylnck = "eksik veri girdin"
+            else:
+                ylnck = varlarvs.havadark(mesajlarınhepsi[1])
+        elif mesaj == "hava2":
+            if len(mesajlarınhepsi) == 1:
+                ylnck = "eksik veri girdin"
+            else:
+                ylnck = varlarvs.hav
         elif mesaj == "gecici":
-            print(kul_aktiviteleri)
+            print(mesajlarınhepsi)
             ylnck = "printlendi"
+        elif mesaj == "dene":
+            ylnck = varlarvs.denemefonk(mesajlarınhepsi[1])
         elif mesaj == "çık":
             ylnck = "bb ben kaçar"
             await message.channel.send(ylnck)
