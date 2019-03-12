@@ -56,6 +56,13 @@ async def on_message(message):
             ylnck = mesajlarınhepsi
         elif mesaj == "dene":
             ylnck = type(msjyollayan.activity.start)
+        elif mesaj == "para":
+            if len(mesajlarınhepsi) == 1:
+                ylnck = "eksik veri girdin"
+            elif len(mesajlarınhepsi) == 4:
+                ylnck = varlarvs.paracevir(mesajlarınhepsi[1], mesajlarınhepsi[2], mesajlarınhepsi[3])
+            else:
+                ylnck = "hatalı"
         elif mesaj == "çık":
             ylnck = "bb ben kaçar"
             await message.channel.send(ylnck)

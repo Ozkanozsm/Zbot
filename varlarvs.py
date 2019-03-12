@@ -51,12 +51,17 @@ def oyuntepkisi(before, member):
         return "{} {} oynamaya başladı".format(member.display_name, member.activity.name)
 
 
-def denemefonk(ilce):
-    if ilce == "maltepe":
-        latilong = "40.953845,29.124498"
-    else:
-        latilong = "hatalı ilçe girdin mal mısın lan şerro"
-    return latilong
+def paracevir(cevirme1, cevirme2, para):
+    currencyurl = "https://free.currencyconverterapi.com/api/v6/convert?compact=ultra&apiKey=e91f7d7a9a8843f929ee&q="
+    cevirme1 = cevirme1.upper()
+    cevirme2 = cevirme2.upper()
+    para = float(para)
+    ceviriyazimi = cevirme1 + "_" + cevirme2
+    urlac = urllib.request.urlopen(currencyurl + ceviriyazimi)
+    veri = json.loads(urlac.read().decode())
+    cevrik = round(veri[ceviriyazimi], 2)
+    carpim = para * cevrik
+    return "{} {} = {} {}".format(para, cevirme1, cevirme2, carpim)
 
 
 def havadark(ilce):
