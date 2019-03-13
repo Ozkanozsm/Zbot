@@ -3,6 +3,7 @@ import time
 import datetime
 import json
 import urllib.request
+import tokenim
 
 prefix = "'"
 onay = "oke"
@@ -52,27 +53,26 @@ def oyuntepkisi(before, member):
 
 
 def paracevir(cevirme1, cevirme2, para):
-    currencyurl = "https://free.currencyconverterapi.com/api/v6/convert?compact=ultra&apiKey=e91f7d7a9a8843f929ee&q="
+    currencyurl = "https://free.currencyconverterapi.com/api/v6/convert?compact=ultra&apiKey="
     cevirme1 = cevirme1.upper()
     cevirme2 = cevirme2.upper()
     para = float(para)
     ceviriyazimi = cevirme1 + "_" + cevirme2
-    urlac = urllib.request.urlopen(currencyurl + ceviriyazimi)
+    urlac = urllib.request.urlopen(currencyurl + tokenim.currencyapi + ceviriyazimi)
     veri = json.loads(urlac.read().decode())
     cevrik = round(veri[ceviriyazimi], 2)
-    carpim = para * cevrik
+    carpim = round((para * cevrik), 2)
     return "{} {} = {} {}".format(para, cevirme1, cevirme2, carpim)
 
 
 def havadark(ilce):
-    darkskyapi = "5dc9545bd1a1234aee3dce97e8953b66/"
     darkskyurl = "https://api.darksky.net/forecast/"
     if ilce in dark_ilce_longlati:
         latilong = dark_ilce_longlati[ilce]
     else:
         return "hatalı ilçe girdin"
 
-    urlacan = urllib.request.urlopen(darkskyurl + darkskyapi + latilong + "?lang=tr&units=auto")
+    urlacan = urllib.request.urlopen(darkskyurl + tokenim.darkskyapi + latilong + "?lang=tr&units=auto")
     veri = json.loads(urlacan.read().decode())
     suanki_ozet = veri["currently"]["summary"]
     saatlik_ozet = veri["hourly"]["summary"]
