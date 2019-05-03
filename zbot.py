@@ -56,6 +56,8 @@ async def on_message(message):
             ylnck = mesajlarınhepsi
         elif mesaj == "dene":
             ylnck = type(msjyollayan.activity.start)
+        elif mesaj == "site":
+            ylnck = "http://zbotwiki.gq"
         elif mesaj == "para":
             if len(mesajlarınhepsi) == 1:
                 ylnck = "eksik veri girdin"
