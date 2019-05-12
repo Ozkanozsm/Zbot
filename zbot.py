@@ -7,7 +7,7 @@ import datetime
 client = discord.Client()
 botacmazamani = None
 kul_aktiviteleri = {}
-mesajatilankanal = ""
+mesajatilankanal = 531912642772860938
 
 
 @client.event
@@ -47,6 +47,8 @@ async def on_message(message):
             ylnck = botacmazamani
         elif mesaj == "up":
             ylnck = varlarvs.nekadardirup(botacmazamani)
+        elif mesaj == "açılış":
+            ylnck = varlarvs.acilis(botacmazamani)
         elif mesaj == "hava":
             if len(mesajlarınhepsi) == 1:
                 ylnck = "eksik veri girdin"

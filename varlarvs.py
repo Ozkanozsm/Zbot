@@ -93,12 +93,28 @@ def pingle():
 def nekadardirup(ilkzaman):
     suankizaman = datetime.datetime.now()
     upzamani = suankizaman - ilkzaman
-    if upzamani.seconds // 60 < 1:
-        return "{} saniye".format(upzamani.seconds)
+    uptsaniye = round(upzamani.total_seconds())
+    uptdakika = uptsaniye // 60
+    uptsaat = uptdakika // 60
+    uptgun = uptsaat // 24
+    if uptsaniye // 60 < 1:
+        return "{} saniye".format(uptsaniye)
+    elif uptdakika // 60 < 1:
+        upksaniye = uptsaniye % 60
+        return "{} dakika, {} saniye".format(uptdakika, upksaniye)
+    elif uptsaat // 24 < 1:
+        upksaniye = uptsaniye % 60
+        upkdakika = uptdakika % 60
+        return "{} saat, {} dakika, {} saniye".format(uptsaat, upkdakika, upksaniye)
     else:
-        updakkasi = upzamani.seconds // 60
-        upsaniyesi = upzamani.seconds % 60
-        return "{} dakika {} saniye".format(updakkasi, upsaniyesi)
+        upksaniye = uptsaniye % 60
+        upkdakika = uptdakika % 60
+        upksaat = uptsaat % 24
+        return "{} gün, {} saat, {} dakika, {} saniye".format(uptgun, upksaat, upkdakika, upksaniye)
+
+
+def acilis(botacilisi):
+    return str(botacilisi)
 
 
 mesajlarakarsilik = {
