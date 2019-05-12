@@ -114,7 +114,7 @@ def nekadardirup(ilkzaman):
 
 
 def acilis(botacilisi):
-    return str(botacilisi)
+    return str(botacilisi.strftime("%H:%M:S %-d.%-m.%Yz"))
 
 
 mesajlarakarsilik = {
