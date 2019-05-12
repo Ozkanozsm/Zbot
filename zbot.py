@@ -58,6 +58,8 @@ async def on_message(message):
             ylnck = mesajlarınhepsi
         elif mesaj == "dene":
             ylnck = "bura şuan boş"
+        elif mesaj == "latilong":
+            ylnck = varlarvs.latilongsorgula(mesajlarınhepsi[1])
         elif mesaj == "para":
             if len(mesajlarınhepsi) == 1:
                 ylnck = "eksik veri girdin"

@@ -65,16 +65,30 @@ def paracevir(cevirme1, cevirme2, para):
     return "{} {} = {} {}".format(para, cevirme1, cevirme2, carpim)
 
 
+def latilongbul(yeradi):
+    opencageurl = "https://api.opencagedata.com/geocode/v1/json?language=tr&key="
+    urlacan = urllib.request.urlopen(opencageurl + tokenim.opencageapi + yeradi)
+    veri = json.loads(urlacan.read().decode())
+    geometry = veri["results"][0]["geometry"]
+    return "{},{}".format(geometry["lat"], geometry["lng"])
+
+
+def latilongsorgula(yeradi):
+    opencageurl = "https://api.opencagedata.com/geocode/v1/json?language=tr&key="
+    urlacan = urllib.request.urlopen(opencageurl + tokenim.opencageapi + yeradi)
+    veri = json.loads(urlacan.read().decode())
+    geometry = veri["results"][0]["geometry"]
+    gunluklimit = veri["rate"]["limit"]
+    gunlukkalan = veri["rate"]["remaining"]
+    return "{},{} kullanım: {}/{}".format(geometry["lat"], geometry["lng"], gunlukkalan, gunluklimit)
+
+
 def havadark(ilce):
     darkskyurl = "https://api.darksky.net/forecast/"
-    if ilce in dark_ilce_longlati:
-        latilong = dark_ilce_longlati[ilce]
-    else:
-        return "hatalı ilçe girdin"
-
+    latilong = latilongbul(ilce)
     urlacan = urllib.request.urlopen(darkskyurl + tokenim.darkskyapi + latilong + "?lang=tr&units=auto")
     veri = json.loads(urlacan.read().decode())
-    suanki_ozet = veri["currently"]["summary"]
+    # suanki_ozet = veri["currently"]["summary"]
     saatlik_ozet = veri["hourly"]["summary"]
     derece = str(round(veri["hourly"]["data"][0]["temperature"]))
     return derece + "°C" + " " + saatlik_ozet
@@ -128,7 +142,3 @@ mesajlarakarsilik = {
 
 oynamalar = ["oyun", "nabıyom", "nabıyorum", "neyapıyorum"]
 hazirlik = ["hazır", "hazir", "ready", "hazırız", "bura", "Bura", "Hazır"]
-dark_ilce_longlati = {
-    "maltepe": "40.953845,29.124498",
-    "acıbadem": "41.005202, 29.043165"
-}
