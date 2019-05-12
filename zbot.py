@@ -42,9 +42,7 @@ async def on_message(message):
             ylnck = str(round(client.latency, 2)) + " saniye"
         elif mesaj == "pingle":
             # varlarvs.pingle()
-            ylnck = "__**pinglemek benim ne haddime!!**__\n \t\t\t_(şaka şaka daha ayarlanmadım)_"
-        elif mesaj == "botacilisi":
-            ylnck = botacmazamani
+            ylnck = "__**pinglemek benim ne haddime!!**__\n \t\t\t_(şaka şaka daha beceremiyorum pinglemeyi)_"
         elif mesaj == "up":
             ylnck = varlarvs.nekadardirup(botacmazamani)
         elif mesaj == "açılış":
