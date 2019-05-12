@@ -87,7 +87,8 @@ def mesajadondur(a):
 
 
 def pingle():
-    os.system("start cmd /c ping -n 20 google.com")
+    # os.system("start cmd /c ping -n 20 google.com")
+    return
 
 
 def nekadardirup(ilkzaman):
@@ -114,7 +115,7 @@ def nekadardirup(ilkzaman):
 
 
 def acilis(botacilisi):
-    return str(botacilisi.strftime("%H:%M:S %-d.%-m.%Yz"))
+    return str(botacilisi.strftime("%H:%M:%S %d.%m.%Y"))
 
 
 mesajlarakarsilik = {
@@ -126,7 +127,7 @@ mesajlarakarsilik = {
 }
 
 oynamalar = ["oyun", "nabıyom", "nabıyorum", "neyapıyorum"]
-hazirlik = ["hazır", "hazir", "ready", "hazırız", "bura"]
+hazirlik = ["hazır", "hazir", "ready", "hazırız", "bura", "Bura", "Hazır"]
 dark_ilce_longlati = {
     "maltepe": "40.953845,29.124498",
     "acıbadem": "41.005202, 29.043165"

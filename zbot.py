@@ -41,8 +41,8 @@ async def on_message(message):
         elif mesaj == "ping":
             ylnck = str(round(client.latency, 2)) + " saniye"
         elif mesaj == "pingle":
-            varlarvs.pingle()
-            ylnck = "pingleniyor..."
+            # varlarvs.pingle()
+            ylnck = "__**pinglemek benim ne haddime!!**__\n \t\t\t_(şaka şaka daha ayarlanmadım)_"
         elif mesaj == "botacilisi":
             ylnck = botacmazamani
         elif mesaj == "up":
@@ -57,21 +57,27 @@ async def on_message(message):
         elif mesaj == "gecici":
             ylnck = mesajlarınhepsi
         elif mesaj == "dene":
-            ylnck = type(msjyollayan.activity.start)
-        elif mesaj == "site":
-            ylnck = "http://zbotwiki.gq"
+            ylnck = "bura şuan boş"
         elif mesaj == "para":
             if len(mesajlarınhepsi) == 1:
                 ylnck = "eksik veri girdin"
             elif len(mesajlarınhepsi) == 4:
                 ylnck = varlarvs.paracevir(mesajlarınhepsi[1], mesajlarınhepsi[2], mesajlarınhepsi[3])
+            elif len(mesajlarınhepsi) == 3:
+                ylnck = varlarvs.paracevir(mesajlarınhepsi[1], mesajlarınhepsi[2], "1")
             else:
                 ylnck = "hatalı"
         elif mesaj == "çık":
-            ylnck = "bb ben kaçar"
-            await message.channel.send(ylnck)
-            print("---BOT KAPATILDI---")
-            await client.logout()
+            if message.author.id == 134323487085953025:
+                ylnck = "bb ben kaçar"
+                await message.channel.send(ylnck)
+                print("---BOT KAPATILDI---")
+                await client.logout()
+                return
+            else:
+                ylnck = "#play sen kimsin ya"
+                await message.channel.send(ylnck)
+                return
 
         statu = msjyollayan.status.name
         if statu != "online":
