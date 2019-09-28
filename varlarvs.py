@@ -134,7 +134,6 @@ def acilis(botacilisi):
 
 mesajlarakarsilik = {
     "sa": "as",
-    "ananzaa": "sensin o",
     "çal": "#play",
     "naber": "iyi senden",
     "anan": "102 92"
