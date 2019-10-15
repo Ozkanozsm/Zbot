@@ -7,7 +7,7 @@ import datetime
 client = discord.Client()
 botacmazamani = None
 kul_aktiviteleri = {}
-mesajatilankanal = 531912642772860938
+oyunbildirimi = 463052720933306379
 
 
 @client.event
@@ -37,7 +37,7 @@ async def on_message(message):
                 ylnck = msjyollayan.avatar_url
             elif len(mesajlarınhepsi) == 2:
                 fonksiyona = varlarvs.avatar(mesajlarınhepsi[1])
-                ylnck = client.get_guild(135796707580444674).get_member(fonksiyona).avatar_url
+                ylnck = client.get_guild(463052720509812736).get_member(fonksiyona).avatar_url
         elif mesaj == "ikon":
             ylnck = message.guild.icon_url
         elif mesaj in varlarvs.oynamalar:
@@ -59,7 +59,7 @@ async def on_message(message):
         elif mesaj == "gecici":
             ylnck = mesajlarınhepsi
         elif mesaj == "dene":
-            ylnck = kul_aktiviteleri
+            ylnck = "şuan boşum"
         elif mesaj == "latilong":
             ylnck = varlarvs.latilongsorgula(mesajlarınhepsi[1])
         elif mesaj == "para":
@@ -102,7 +102,7 @@ async def on_member_update(before, after):
                     if member.activity.name == "Spotify":
                         return
                     yollancak = varlarvs.oyuntepkisi(kul_aktiviteleri, member)
-                    await member.guild.get_channel(mesajatilankanal.id).send(yollancak)
+                    await member.guild.get_channel(oyunbildirimi).send(yollancak)
                 kul_aktiviteleri[member] = member.activity.name
             else:
                 kul_aktiviteleri[member] = ""
@@ -116,9 +116,8 @@ async def on_member_join(member):
 
 @client.event
 async def on_ready():
-    global kul_aktiviteleri, botacmazamani, mesajatilankanal
-    mesajatilankanal = client.get_channel("220661231130771467")
-    for i in client.get_guild(135796707580444674).members:
+    global kul_aktiviteleri, botacmazamani
+    for i in client.get_guild(463052720509812736).members:
         if i.bot:
             continue
         kul_aktiviteleri.update({i.id: i})
