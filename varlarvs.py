@@ -20,13 +20,14 @@ def oyun(oyunadi):
 def nabiyom(aktivitesi):
     if not aktivitesi:
         ylnck = "Hiçbir şey oynamıyorsun"
-
-    if aktivitesi.type.name == "listening":
-        ylnck = muzik(aktivitesi.title)
-    elif aktivitesi.type.name == "playing":
-        ylnck = oyun(aktivitesi.name)
     else:
-        ylnck = "Kodlanmadığım bir şey yapıyorsun"
+        if aktivitesi.type.name == "listening":
+            ylnck = muzik(aktivitesi.title)
+        elif aktivitesi.type.name == "playing":
+            ylnck = oyun(aktivitesi.name)
+        else:
+            ylnck = "Kodlanmadığım bir şey yapıyorsun"
+
     return ylnck
 
 
