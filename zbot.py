@@ -33,7 +33,11 @@ async def on_message(message):
         elif mesaj == "name":
             ylnck = msjyollayan.name
         elif mesaj == "avatar":
-            ylnck = msjyollayan.avatar_url
+            if len(mesajlarınhepsi) == 1:
+                ylnck = msjyollayan.avatar_url
+            elif len(mesajlarınhepsi) == 2:
+                fonksiyona = varlarvs.avatar(mesajlarınhepsi[1])
+                ylnck = client.get_guild(135796707580444674).get_member(fonksiyona).avatar_url
         elif mesaj == "ikon":
             ylnck = message.guild.icon_url
         elif mesaj in varlarvs.oynamalar:
@@ -55,7 +59,7 @@ async def on_message(message):
         elif mesaj == "gecici":
             ylnck = mesajlarınhepsi
         elif mesaj == "dene":
-            ylnck = "bura şuan boş"
+            ylnck = kul_aktiviteleri
         elif mesaj == "latilong":
             ylnck = varlarvs.latilongsorgula(mesajlarınhepsi[1])
         elif mesaj == "para":
@@ -117,10 +121,7 @@ async def on_ready():
     for i in client.get_guild(135796707580444674).members:
         if i.bot:
             continue
-        if not i.activity:
-            kul_aktiviteleri.update({i: ""})
-        else:
-            kul_aktiviteleri.update({i: i.activity.name})
+        kul_aktiviteleri.update({i.id: i})
     botacmazamani = datetime.datetime.now()
     print('Logged in as')
     print("--" + client.user.name + "--")

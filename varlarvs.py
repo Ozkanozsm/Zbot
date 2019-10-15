@@ -31,6 +31,13 @@ def nabiyom(aktivitesi):
     return ylnck
 
 
+def avatar(uye):
+    uyeid = "".join("".join(uye.split("<@")).split(">"))
+    if uyeid.startswith("!"):
+        uyeid = "".join(uyeid.split("!"))
+    return int(uyeid)
+
+
 def oyuntepkisi(before, member):
     if member.activity.name in before.values():
         partilistesi = list()
