@@ -83,10 +83,6 @@ async def on_message(message):
                 await message.channel.send(ylnck)
                 return
 
-        statu = msjyollayan.status.name
-        if statu != "online":
-            ylnck = ylnck + ", ama <@{}> {} gözüküyorsun haberin olsun".format(msjyollayan.id, statu)
-
         await message.channel.send(ylnck)
 
 
