@@ -53,8 +53,8 @@ def oyuntepkisi(before, member):
         elif len(partilistesi) == 3:
             yollanacak = "{} partiye katıldı. Squad tamamlandı!".format(member.display_name)
         elif len(partilistesi) == 4:
-            yollanacak = "{}, {} squad'ına dahil oldu. Secret hitler mi giriyolar yoksa".format(member.display_name,
-                                                                                                member.activity.name)
+            yollanacak = "{}, {} squad'ına dahil oldu.".format(member.display_name,
+                                                               member.activity.name)
         return yollanacak
     else:
         return "{} {} oynamaya başladı".format(member.display_name, member.activity.name)

@@ -6,6 +6,7 @@ import datetime
 
 client = discord.Client()
 botacmazamani = None
+kul_bilgileri = {}
 kul_aktiviteleri = {}
 oyunbildirimi = 463052720933306379
 
@@ -59,7 +60,7 @@ async def on_message(message):
         elif mesaj == "gecici":
             ylnck = mesajlarınhepsi
         elif mesaj == "dene":
-            ylnck = "şuan boşum"
+            ylnck = "bura boş"
         elif mesaj == "latilong":
             ylnck = varlarvs.latilongsorgula(mesajlarınhepsi[1])
         elif mesaj == "para":
@@ -112,11 +113,18 @@ async def on_member_join(member):
 
 @client.event
 async def on_ready():
-    global kul_aktiviteleri, botacmazamani
+    global kul_bilgileri, botacmazamani, kul_aktiviteleri
     for i in client.get_guild(463052720509812736).members:
+        """i, her bir member objesi"""
         if i.bot:
             continue
         kul_aktiviteleri.update({i.id: i})
+        kul_bilgileri.update({i.id: dict()})
+        memberdicti = kul_bilgileri[i.id]
+        for direlemani in dir(i):
+            if direlemani.startswith("_"):
+                eval('memberdicti.update({direlemani: i.' + direlemani + '})')
+
     botacmazamani = datetime.datetime.now()
     print('Logged in as')
     print("--" + client.user.name + "--")
