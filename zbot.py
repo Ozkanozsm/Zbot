@@ -106,6 +106,8 @@ async def on_member_update(before, after):
                         return
                     if member.activity.name == "Custom Status":
                         return
+                    if member.activity.name == "MusicBee":
+                        return
                     yollancak = varlarvs.oyuntepkisi(frdmKulAkt, member)
                     await member.guild.get_channel(frdmBildirim).send(yollancak)
                 frdmKulAkt[member] = member.activity.name
@@ -118,6 +120,8 @@ async def on_member_update(before, after):
                     if member.activity.name == "Spotify":
                         return
                     if member.activity.name == "Custom Status":
+                        return
+                    if member.activity.name == "MusicBee":
                         return
                     yollancak = varlarvs.oyuntepkisi(animuKulAkt, member)
                     await member.guild.get_channel(animuBildirim).send(yollancak)
