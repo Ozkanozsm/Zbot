@@ -149,3 +149,4 @@ mesajlarakarsilik = {
 
 oynamalar = ["oyun", "nabıyom", "nabıyorum", "neyapıyorum"]
 hazirlik = ["hazır", "hazir", "ready", "hazırız", "bura", "Bura", "Hazır"]
+harici_aktiviteler = ["Spotify", "Custom Status", "MusicBee"]

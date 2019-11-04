@@ -96,38 +96,26 @@ async def on_member_update(before, after):
     member = after
     if member.bot:
         return
-
-    if member.guild.id == frdmGuildId:
+    memguilidsi = member.guild.id
+    if (memguilidsi == frdmGuildId) or (memguilidsi == animuGuildId):
         if before.activity != after.activity:
             if after.activity:
                 if (not before.activity) or (before.activity.name != after.activity.name):
-                    print(member.activity.name)
-                    if member.activity.name == "Spotify":
+                    aktvt_adi = member.activity.name
+                    if aktvt_adi in varlarvs.harici_aktiviteler:
                         return
-                    if member.activity.name == "Custom Status":
-                        return
-                    if member.activity.name == "MusicBee":
-                        return
-                    yollancak = varlarvs.oyuntepkisi(frdmKulAkt, member)
-                    await member.guild.get_channel(frdmBildirim).send(yollancak)
-                frdmKulAkt[member] = member.activity.name
+                    if memguilidsi == frdmGuildId:
+                        frdmKulAkt[member] = member.activity.name
+                        yollancak = varlarvs.oyuntepkisi(frdmKulAkt, member)
+                        await member.guild.get_channel(frdmBildirim).send(yollancak)
+                    if memguilidsi == animuGuildId:
+                        yollancak = varlarvs.oyuntepkisi(animuKulAkt, member)
+                        await member.guild.get_channel(animuBildirim).send(yollancak)
             else:
-                frdmKulAkt[member] = ""
-    elif member.guild.id == animuGuildId:
-        if before.activity != after.activity:
-            if after.activity:
-                if (not before.activity) or (before.activity.name != after.activity.name):
-                    if member.activity.name == "Spotify":
-                        return
-                    if member.activity.name == "Custom Status":
-                        return
-                    if member.activity.name == "MusicBee":
-                        return
-                    yollancak = varlarvs.oyuntepkisi(animuKulAkt, member)
-                    await member.guild.get_channel(animuBildirim).send(yollancak)
-                animuKulAkt[member] = member.activity.name
-            else:
-                animuKulAkt[member] = ""
+                if memguilidsi == frdmGuildId:
+                    frdmKulAkt[member] = ""
+                if memguilidsi == animuGuildId:
+                    animuKulAkt[member] = ""
 
 
 @client.event
