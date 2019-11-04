@@ -7,8 +7,12 @@ import datetime
 client = discord.Client()
 botacmazamani = None
 kul_bilgileri = {}
-kul_aktiviteleri = {}
-oyunbildirimi = 463052720933306379
+animuKulAkt = {}
+frdmKulAkt = {}
+frdmBildirim = 463052720933306379
+frdmGuildId = 463052720509812736
+animuGuildId = 637010492891725835
+animuBildirim = 640722624770605077
 
 
 @client.event
@@ -38,7 +42,7 @@ async def on_message(message):
                 ylnck = msjyollayan.avatar_url
             elif len(mesajlarınhepsi) == 2:
                 fonksiyona = varlarvs.avatar(mesajlarınhepsi[1])
-                ylnck = client.get_guild(463052720509812736).get_member(fonksiyona).avatar_url
+                ylnck = message.author.guild.get_member(fonksiyona).avatar_url
         elif mesaj == "ikon":
             ylnck = message.guild.icon_url
         elif mesaj in varlarvs.oynamalar:
@@ -92,38 +96,61 @@ async def on_member_update(before, after):
     member = after
     if member.bot:
         return
-    if member.guild.name == "Freedom":
+
+    if member.guild.id == frdmGuildId:
+        if before.activity != after.activity:
+            if after.activity:
+                if (not before.activity) or (before.activity.name != after.activity.name):
+                    print(member.activity.name)
+                    if member.activity.name == "Spotify":
+                        return
+                    if member.activity.name == "Custom Status":
+                        return
+                    yollancak = varlarvs.oyuntepkisi(frdmKulAkt, member)
+                    await member.guild.get_channel(frdmBildirim).send(yollancak)
+                frdmKulAkt[member] = member.activity.name
+            else:
+                frdmKulAkt[member] = ""
+    elif member.guild.id == animuGuildId:
         if before.activity != after.activity:
             if after.activity:
                 if (not before.activity) or (before.activity.name != after.activity.name):
                     if member.activity.name == "Spotify":
                         return
-                    yollancak = varlarvs.oyuntepkisi(kul_aktiviteleri, member)
-                    await member.guild.get_channel(oyunbildirimi).send(yollancak)
-                kul_aktiviteleri[member] = member.activity.name
+                    if member.activity.name == "Custom Status":
+                        return
+                    yollancak = varlarvs.oyuntepkisi(animuKulAkt, member)
+                    await member.guild.get_channel(animuBildirim).send(yollancak)
+                animuKulAkt[member] = member.activity.name
             else:
-                kul_aktiviteleri[member] = ""
+                animuKulAkt[member] = ""
 
 
 @client.event
 async def on_member_join(member):
-    kanalidsi = 531912642772860938
-    await member.guild.get_channel(kanalidsi).send("<@{}>, kanala hoşgeldin!".format(member.id))
+    if member.guild.id == frdmGuildId:
+        kanalidsi = 531912642772860938
+        await member.guild.get_channel(kanalidsi).send("<@{}>, kanala hoşgeldin!".format(member.id))
 
 
 @client.event
 async def on_ready():
-    global kul_bilgileri, botacmazamani, kul_aktiviteleri
-    for i in client.get_guild(463052720509812736).members:
+    global kul_bilgileri, botacmazamani, frdmKulAkt, animuGuildId
+    for i in client.get_guild(frdmGuildId).members:
         """i, her bir member objesi"""
         if i.bot:
             continue
-        kul_aktiviteleri.update({i.id: i})
+        frdmKulAkt.update({i.id: i})
         kul_bilgileri.update({i.id: dict()})
         memberdicti = kul_bilgileri[i.id]
         for direlemani in dir(i):
             if direlemani.startswith("_"):
                 eval('memberdicti.update({direlemani: i.' + direlemani + '})')
+    for i in client.get_guild(animuGuildId).members:
+        """i, her bir member objesi"""
+        if i.bot:
+            continue
+        animuKulAkt.update({i.id: i})
 
     botacmazamani = datetime.datetime.now()
     print('Logged in as')
