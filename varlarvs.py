@@ -39,7 +39,8 @@ def avatar(uye):
 
 
 def oyuntepkisi(before, member):
-    if member.activity.name in before.values():
+    # bu fonksiyonun sonundaki return {} oynamaya başladı şeyine else koy
+    """if member.activity.name in before.values():
         partilistesi = list()
         yollanacak = None
         for i in before.keys():
@@ -57,7 +58,8 @@ def oyuntepkisi(before, member):
                                                                member.activity.name)
         return yollanacak
     else:
-        return "{} {} oynamaya başladı".format(member.display_name, member.activity.name)
+    """
+    return "{} {} oynamaya başladı".format(member.display_name, member.activity.name)
 
 
 def paracevir(cevirme1, cevirme2, para):
