@@ -13,6 +13,7 @@ frdmBildirim = 463052720933306379
 frdmGuildId = 463052720509812736
 animuGuildId = 637010492891725835
 animuBildirim = 640722624770605077
+dislananIDler = []
 
 
 @client.event
@@ -45,6 +46,9 @@ async def on_message(message):
                 ylnck = message.author.guild.get_member(fonksiyona).avatar_url
         elif mesaj == "ikon":
             ylnck = message.guild.icon_url
+        elif mesaj == "disla":
+            dislananIDler.append(int(mesajlarınhepsi[1]))
+            ylnck = "{}, dışlanan id'lere eklendi".format(mesajlarınhepsi[1])
         elif mesaj in varlarvs.oynamalar:
             ylnck = varlarvs.nabiyom(msjyollayan.activity)
         elif mesaj == "ping":
@@ -94,6 +98,8 @@ async def on_message(message):
 @client.event
 async def on_member_update(before, after):
     member = after
+    if after.id in dislananIDler:
+        return
     if member.bot:
         return
     memguilidsi = member.guild.id
